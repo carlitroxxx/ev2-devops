@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PropertiesComponent">{}</component>
+  <component name="RunManager" selected="Spring Boot.SpringbootApiRestApplication">
+    <configuration name="SpringbootApiRestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Springboot-API-REST" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.citt.SpringbootApiRestApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringbootApiRestDespachoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Springboot-API-REST-DESPACHO" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.citt.SpringbootApiRestDespachoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+</project>
