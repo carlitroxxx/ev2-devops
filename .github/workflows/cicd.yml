@@ -50,7 +50,7 @@ jobs:
           proxy_username: ${{ secrets.EC2_USER }}
           proxy_key: ${{ secrets.EC2_SSH_PEM }}
           script: |
-            cd /home/ec2-user
+            cd /home/ec2-user/
             docker compose down
             docker compose pull
             docker compose up -d
@@ -62,7 +62,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_PEM }}
           script: |
-            cd /home/ec2-user
+            cd /home/ec2-user/
             docker compose down
             docker compose pull
             docker compose up -d
