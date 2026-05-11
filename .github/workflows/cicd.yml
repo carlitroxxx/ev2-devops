@@ -6,7 +6,7 @@ on:
       - deploy
 
 jobs:
-  build-push-deploy:
+  build-push-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
