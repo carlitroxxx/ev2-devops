@@ -1,0 +1,66 @@
+name: Build Push Deploy
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  build-push-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Login Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build y push backend despachos
+        uses: docker/build-push-action@v6
+        with:
+          context: ./back-Despachos_SpringBoot/Springboot-API-REST-DESPACHO
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/backend-despachos:latest
+
+      - name: Build y push backend ventas
+        uses: docker/build-push-action@v6
+        with:
+          context: ./back-Ventas_SpringBoot/Springboot-API-REST
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/backend-ventas:latest
+
+      - name: Build y push frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./front_despacho
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/frontend-despacho:latest
+
+      - name: Deploy backend privado
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_BACKEND_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_PEM }}
+          proxy_host: ${{ secrets.EC2_FRONTEND_HOST }}
+          proxy_username: ${{ secrets.EC2_USER }}
+          proxy_key: ${{ secrets.EC2_SSH_PEM }}
+          script: |
+            cd /home/ec2-user/backend-app
+            docker-compose pull
+            docker-compose up -d
+
+      - name: Deploy frontend publico
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_FRONTEND_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_PEM }}
+          script: |
+            cd /home/ec2-user/frontend-app
+            docker-compose pull
+            docker-compose up -d
