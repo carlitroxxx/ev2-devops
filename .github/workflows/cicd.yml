@@ -50,10 +50,10 @@ jobs:
           proxy_username: ${{ secrets.EC2_USER }}
           proxy_key: ${{ secrets.EC2_SSH_PEM }}
           script: |
-            cd /home/ec2-user/
-            docker compose down
+            cd /home/ec2-user
+            docker compose down --remove-orphans
             docker compose pull
-            docker compose up -d
+            docker compose up -d --force-recreate
 
       - name: Deploy frontend publico
         uses: appleboy/ssh-action@v1.0.3
@@ -62,7 +62,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_PEM }}
           script: |
-            cd /home/ec2-user/
-            docker compose down
+            cd /home/ec2-user
+            docker compose down --remove-orphans
             docker compose pull
-            docker compose up -d
+            docker compose up -d --force-recreate
