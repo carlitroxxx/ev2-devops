@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e24a0450-c29f-4481-952a-5e08b6aae1be" name="Changes" comment="fix ec2 desplegado">
+    <list default="true" id="e24a0450-c29f-4481-952a-5e08b6aae1be" name="Changes" comment="fix endpoint test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front_despacho/src/componentes/CrudAdmin/TableCompras.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_despacho/src/componentes/CrudAdmin/TableCompras.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front_despacho/src/componentes/CrudAdmin/TableDespachos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_despacho/src/componentes/CrudAdmin/TableDespachos.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,24 +37,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Notification.DisplayName-DoNotAsk-DatabaseConfigFileWatcher.found": "New/updated database configurations found",
-    "Notification.DoNotAsk-DatabaseConfigFileWatcher.found": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "deploy",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Notification.DisplayName-DoNotAsk-DatabaseConfigFileWatcher.found&quot;: &quot;New/updated database configurations found&quot;,
+    &quot;Notification.DoNotAsk-DatabaseConfigFileWatcher.found&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;deploy&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Spring Boot.SpringbootApiRestApplication">
     <configuration name="SpringbootApiRestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="Springboot-API-REST" />
@@ -89,7 +88,8 @@
       <updated>1778457650048</updated>
       <workItem from="1778457651583" duration="217000" />
       <workItem from="1778469836868" duration="1540000" />
-      <workItem from="1778473786190" duration="2792000" />
+      <workItem from="1778473786190" duration="2811000" />
+      <workItem from="1778476689168" duration="347000" />
     </task>
     <task id="LOCAL-00001" summary="ec2 desplegado">
       <option name="closed" value="true" />
@@ -155,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778473814248</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix endpoint test">
+      <option name="closed" value="true" />
+      <created>1778476616221</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1778476616221</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,6 +172,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ec2 desplegado" />
     <MESSAGE value="fix ec2 desplegado" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix ec2 desplegado" />
+    <MESSAGE value="fix endpoint test" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix endpoint test" />
   </component>
 </project>
