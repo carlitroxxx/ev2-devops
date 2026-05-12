@@ -1,71 +1,190 @@
 # Innovatech Chile - Etapa 2: Despliegue y Automatización Cloud
 
-Este repositorio contiene la solución técnica para la Etapa 2 del proyecto de la empresa **Innovatech Chile**. El objetivo principal es la contenedorización de una arquitectura de microservicios, la persistencia de datos y la implementación de un flujo de Integración y Entrega Continua (CI/CD) para su despliegue en Amazon Web Services (AWS).
-
-## 🚀 Tecnologías Utilizadas
-* **Frontend:** React / Vite.
-* **Backend:** Microservicios con Java Spring Boot (Ventas y Despachos).
-* **Base de Datos:** MySQL.
-* **Contenedorización:** Docker & Docker Compose.
-* **Infraestructura:** AWS EC2 (Instancias en subredes públicas y privadas).
-* **CI/CD:** GitHub Actions.
+Este repositorio contiene la solución técnica desarrollada para la Etapa 2 del proyecto de **Innovatech Chile**.  
+La solución implementa una arquitectura basada en microservicios contenedorizados utilizando Docker, automatización CI/CD con GitHub Actions y despliegue en Amazon Web Services (AWS).
 
 ---
 
-## 🏗️ Arquitectura del Sistema
-La solución se divide en tres componentes principales orquestados para trabajar de forma conjunta:
+# Tecnologías Utilizadas
 
-1. **Capa de Presentación (Frontend):** Desplegada en una instancia EC2 pública para permitir el acceso de los clientes vía navegador.
-2. **Capa de Negocio (Backend):** Dos microservicios independientes que procesan la lógica de ventas y despachos, alojados en una subred privada para mayor seguridad.
-3. **Capa de Datos:** Un motor MySQL que provee almacenamiento persistente a los servicios de backend.
-
----
-
-## 📦 Contenedorización (Docker)
-Cada servicio cuenta con un `Dockerfile` diseñado bajo el principio de **multi-stage build**:
-* **Fase de Compilación:** Se utilizan imágenes de construcción (Node.js/Maven) para generar los artefactos necesarios.
-* **Fase de Producción:** Se utilizan imágenes minimalistas y seguras (Nginx/JRE) ejecutadas con un **usuario no root** para minimizar riesgos de seguridad.
-
-### Orquestación con Docker Compose
-Se incluye un archivo `docker-compose.yml` que orquestra el stack completo, gestionando:
-* **Redes:** Aislamiento de la comunicación entre el Backend y la BD.
-* **Dependencias:** Control del orden de inicio de los servicios (`depends_on`).
-* **Variables de Entorno:** Configuración de puertos y credenciales de acceso.
+- **Frontend:** React + Vite
+- **Backend:** Java Spring Boot
+- **Base de Datos:** MySQL 8
+- **Contenedorización:** Docker & Docker Compose
+- **Proxy Inverso:** Nginx
+- **Infraestructura Cloud:** AWS EC2
+- **Automatización CI/CD:** GitHub Actions
+- **Registro de Imágenes:** Docker Hub
 
 ---
 
-## 💾 Persistencia de Datos
-Se implementó la **persistencia de datos** mediante el uso de **Named Volumes** en Docker.
-* **Justificación:** Se seleccionaron volúmenes nombrados para asegurar que la información de la base de datos sea persistente ante reinicios de los contenedores, garantizando la integridad de los registros de Innovatech.
+# Arquitectura del Sistema
+
+La arquitectura se compone de dos instancias EC2 dentro de AWS:
+
+## Instancia Pública
+Contiene:
+- Frontend React desplegado en contenedor Docker
+- Nginx como Reverse Proxy
+- Acceso desde internet
+
+## Instancia Privada
+Contiene:
+- Microservicio Ventas
+- Microservicio Despachos
+- Base de Datos MySQL
+- Acceso únicamente desde la red privada interna
+
+## Flujo de Comunicación
+
+```text
+Cliente Web
+     ↓
+EC2 Pública (Nginx + Frontend)
+     ↓
+Reverse Proxy Nginx
+     ↓
+EC2 Privada (Microservicios + MySQL)
+```
+
+La implementación de Nginx permite que el frontend pueda consumir los microservicios privados sin exponer directamente los servicios backend a internet.
 
 ---
 
-## 🤖 Pipeline CI/CD (GitHub Actions)
-La automatización del despliegue se define en el directorio `.github/workflows/`. El pipeline se activa mediante un evento `push` en la rama **deploy**:
+# Contenedorización con Docker
 
-1. **Build:** Construcción automatizada de las imágenes Docker para Front y Back.
-2. **Push:** Publicación de imágenes en el registro de contenedores (Docker Hub).
-3. **Deploy:** Conexión vía SSH a la instancia EC2 para actualizar los contenedores en tiempo real.
+Cada componente del sistema posee su propio `Dockerfile`.
 
-> **Seguridad:** El manejo de credenciales de AWS, tokens de Docker y claves SSH se realiza exclusivamente a través de **GitHub Secrets**.
+## Backend Spring Boot
+
+Los microservicios fueron construidos utilizando:
+- Maven
+- Multi-stage build
+- Imágenes Java optimizadas para producción
+
+## Frontend React
+
+El frontend fue compilado utilizando:
+- Node.js
+- Vite
+- Nginx para servir archivos estáticos
 
 ---
 
-## 🛠️ Instrucciones de Ejecución Local
+# Docker Compose
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone [https://github.com/carlitroxxx/ev2-devops.git]
+Se utilizaron archivos `docker-compose.yml` para orquestar los servicios.
 
-2. **Ejecutar el stack de servicios:**
+Las configuraciones incluyen:
+- Redes Docker
+- Variables de entorno
+- Persistencia de datos
+- Dependencias entre servicios
+- Mapeo de puertos
 
-Bash
-docker-compose up -d
+---
 
-3. **Acceder a la aplicación:**
+# Persistencia de Datos
 
-Frontend: http://localhost:80
+La persistencia de MySQL se implementó mediante **Docker Volumes**.
 
-Ventas API: http://localhost:8081
+## Beneficios
+- Mantener información aunque los contenedores se reinicien
+- Separar almacenamiento de la vida útil del contenedor
+- Facilitar administración de datos
 
-Despachos API: http://localhost:8080
+---
+
+# Reverse Proxy con Nginx
+
+Nginx fue implementado en la instancia pública como proxy inverso.
+
+## Funciones principales
+
+- Recibir solicitudes HTTP desde internet
+- Redirigir tráfico hacia frontend React
+- Redirigir rutas `/api` hacia los microservicios privados
+- Ocultar la infraestructura backend interna
+
+## Ejemplo de rutas
+
+```text
+/api/v1/ventas
+/api/v1/despachos
+```
+
+---
+
+# Integración y Despliegue Continuo (CI/CD)
+
+La automatización se implementó utilizando GitHub Actions.
+
+## Flujo Automatizado
+
+1. Build automático de imágenes Docker
+2. Push de imágenes hacia Docker Hub
+3. Conexión SSH hacia instancias EC2
+4. Actualización automática de contenedores
+
+## Seguridad
+
+Las credenciales se manejan mediante:
+- GitHub Secrets
+- Claves SSH
+- Variables de entorno seguras
+
+---
+
+# Infraestructura AWS
+
+## Componentes utilizados
+
+- VPC personalizada
+- Subred pública
+- Subred privada
+- Security Groups
+- EC2
+- Elastic IP
+- NAT Gateway
+
+---
+
+# Ejecución Local
+
+## 1. Clonar repositorio
+
+```bash
+git clone https://github.com/carlitroxxx/ev2-devops.git
+```
+
+## 2. Ejecutar servicios
+
+```bash
+docker compose up -d
+```
+
+## 3. Acceder a la aplicación
+
+### Frontend
+
+```text
+http://localhost
+```
+
+### API Ventas
+
+```text
+http://localhost/api/v1/ventas
+```
+
+### API Despachos
+
+```text
+http://localhost/api/v1/despachos
+```
+
+---
+
+# 👨‍💻 Autores
+
+Proyecto desarrollado para la evaluación de DevOps y Cloud Computing utilizando tecnologías Docker, AWS y GitHub Actions.
