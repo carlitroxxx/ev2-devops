@@ -184,7 +184,3 @@ http://localhost/api/v1/despachos
 ```
 
 ---
-
-# 👨‍💻 Autores
-
-Proyecto desarrollado para la evaluación de DevOps y Cloud Computing utilizando tecnologías Docker, AWS y GitHub Actions.
