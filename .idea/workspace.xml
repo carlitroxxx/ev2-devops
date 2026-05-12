@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e24a0450-c29f-4481-952a-5e08b6aae1be" name="Changes" comment="fix endpoint test">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-Despachos_SpringBoot/Springboot-API-REST-DESPACHO/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/back-Despachos_SpringBoot/Springboot-API-REST-DESPACHO/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-Ventas_SpringBoot/Springboot-API-REST/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/back-Ventas_SpringBoot/Springboot-API-REST/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front_despacho/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/front_despacho/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +92,7 @@
       <workItem from="1778476689168" duration="1484000" />
       <workItem from="1778479726858" duration="3005000" />
       <workItem from="1778553281026" duration="1374000" />
-      <workItem from="1778562287017" duration="143000" />
+      <workItem from="1778562287017" duration="422000" />
     </task>
     <task id="LOCAL-00001" summary="ec2 desplegado">
       <option name="closed" value="true" />
@@ -185,7 +182,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778477679975</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix endpoint test">
+      <option name="closed" value="true" />
+      <created>1778562442098</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1778562442099</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
